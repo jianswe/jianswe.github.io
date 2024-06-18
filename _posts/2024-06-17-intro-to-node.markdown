@@ -12,3 +12,27 @@ If we run this script with command `NODE_ENV=production node script.js`, the out
 ```
 production
 ```
+## Modules
+```js
+(function(){
+  console.log('IIFE')
+})()
+```
+### Module Types
+#### User-created Modules 
+#### Internal Modules 
+##### fs
+```js
+import fs from 'node:fs'
+const data =fs.readFileSync('notes.json', 'utf-8')
+```
+##### http
+```js
+import http from 'node:http'
+
+```
+#### Third-party Modules 
+Use npm to install third-party modules. 
+### Module Standards
+#### CommonJS 
+#### ESM
