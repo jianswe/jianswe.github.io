@@ -90,3 +90,18 @@ Integration testing is the process of testing how different pieces of code work 
 #### E2E Testing
 E2E testing is the process of testing an entire application from start to finish. 
 #### API Testing 
+
+## Servers 
+```js
+import http from 'node:http'
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'text/plain')
+    res.end('Hello world!')
+})
+
+server.listen(4000, () => {
+    console.log('server running on http://localhost:4000')
+})
+```
