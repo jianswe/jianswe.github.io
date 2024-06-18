@@ -26,12 +26,18 @@
 * What is a Worker? When would you use one? 
 
 ## Code Test
+### As an Interviewee
 * Make your code as readable as possible 
     - Comment your code 
     - Don't over complicate the architecture 
 * Don't import too many libraries 
 * If you have time, add unit tests 
 * Ask questions! 
+
+### As an Interviewer 
+* Make the problem as straightforward as possible
+* Be honest with the time constraints
+* Have a code review checklist
 
 | Average | Good | Exceptoinal |
 | ------- | ---- | ----------- |
