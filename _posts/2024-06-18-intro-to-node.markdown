@@ -21,7 +21,7 @@ production
 ### Module Types
 #### User-created Modules 
 #### Internal Modules 
-##### fs 
+##### fs module
 ```js
 import fs from 'node:fs'
 const data = fs.readFileSync('notes.json', 'utf-8')
@@ -43,8 +43,9 @@ Other frequently used methods include:
 * `fs.readdir()` to read the contents of a directory
 * `fs.stat()` to get information about a file
 * `fs.unlink()` to delete a file
-* `fs.rename()` to rename a file 
-##### http
+* `fs.rename()` to rename a file
+
+##### http module
 ```js
 import http from 'node:http'
 
@@ -76,5 +77,6 @@ Three most common ways to introduce async:
 1. Interact with DB
 2. Network call
 3. setTimeout
+
 ### Promise 
 
