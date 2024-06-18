@@ -80,3 +80,13 @@ Three most common ways to introduce async:
 
 ### Promise 
 
+## Testing 
+### Types of test 
+#### Unit Testing
+##### Jest 
+Jest is created by Facebook. 
+#### Integration Testing 
+Integration testing is the process of testing how different pieces of code work together. 
+#### E2E Testing
+E2E testing is the process of testing an entire application from start to finish. 
+#### API Testing 
