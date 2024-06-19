@@ -1,0 +1,65 @@
+# Node Command Line Scripts 
+## Setting Up a Command Line Script 
+```js
+#!/usr/bin/env node
+
+"use strict";
+```
+Make the file executable 
+`chmod u+x ex1.js`
+
+## Command Line Arguments 
+`process.argv`
+The first argument is the path of node 
+The second argument is the path of the JavaScript file
+
+A thrid-party package to parse arguments, called `minimist`. Many packages build on top of it.  
+```js
+var args = require("minimist")(process.argv.slice(2), {
+  boolean: ["help"],
+  string: ["file"]
+})
+```
+Another third-party package which help you build your help doc, called `yargs`, is built on top of `minimist`. 
+
+## Reading Files with Path & FS
+### `path` is built in node. 
+`path.resolve()` returns an absolute path based on relative path. 
+`__dirname` the current directory of the current file. 
+### `fs` is another built-in node module. 
+#### Synchronous readFileSync
+```js
+var contents = fs.readFileSync(filepath) // returns binary buffer of the file.
+// fs.readFileSync(filepath, "utf-8") // by providing encoding format, it will return a string instead of buffer 
+process.stdout.write(contents) // Don't use console.log for buffer 
+```
+
+#### Asynchronous readFile 
+```js
+fs.readFile(filepath, function onContents(err, contents) { // the second arg of readFile is callback
+  if (err) {
+    error(err.toString())
+  } else {
+    process.stdout.write(contents)
+  }
+})
+```
+
+## Processing Input from stdin 
+A module handle standard input `get-stdin`
+```js
+var getStdin = require("get-stdin")
+getStdin().then(processFile).catch(error)
+```
+
+## Environment Variables 
+```js
+var BASE_PATH = path.resolve(
+  process.env.BASE_PATH || __dirname
+)
+
+if (process.env.HELLO) {
+  console.log(process.env.HELLO)
+}
+```
+`$ BASE_PATH=files/ ./ex1.js --file=hello.txt`
