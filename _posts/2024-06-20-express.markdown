@@ -68,7 +68,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-const app= express()
+const app = express()
 
 app.use(cors()) // allow CORS 
 app.use(morgan('dev'))
@@ -166,3 +166,21 @@ import { protect } from './modules/auth'
 
 app.use('/api', protect, router)
 ```
+
+### Hashing Passwords 
+Update `src/modules/auth.ts`
+```ts
+import bcrypt from 'bcrypt'
+
+// password: plain text from user, hash: encypt text from DB 
+export const comparePasswords = (password, hash) => { 
+  return bcrypt.compare(password, hash)
+}
+
+export const hashPassword = (password) => {
+    return bcrypt.hash(password, 5) // 5 is the salt 
+}
+```
+
+### Creating Users
+Create `src/heandlers/user.ts`
