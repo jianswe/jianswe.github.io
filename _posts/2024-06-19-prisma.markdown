@@ -1,3 +1,41 @@
 # Prisma 
 ## ORM 
 Object-Relational Mapping (ORM) is a term used to describe a technique that allows you to interact with a DB using an object-oriented approach. 
+
+## Prisma Overview 
+`npm i prisma --save-dev` Install Prisma as dev dependency.     
+
+`npx prisma init` Initalize Prisma, will create a prisma folder.  
+
+Change `DATABASE_URL` to your database in `.env` file. 
+
+## Schema 
+Inside `schema.prisma` file 
+```prisma
+model User {
+  id String  @id @default(uuid())
+  createdAt DateTime @default(now())
+  
+  username String @unique
+  password String
+  products  Product[]
+}
+
+model Product {
+  id String  @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  name String @db.VarChar(255)
+  belongsToId @String
+  belongsTo User @relation(fields: [belongsToId], references: [id])
+}
+```
+
+## Migrations 
+1. Initial migration, apply schema to DB.
+2. Update schema. 
+
+`npm i @prisma/client` Install Prisma client as dependency. The actually SDK, which is generated based on schema. 
+
+`npx prisma migrate dev --name init` Sync DB with schema, generate Prisma client. 
+
