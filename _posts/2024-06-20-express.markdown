@@ -51,6 +51,8 @@ will get
 }
 ```
 
+### Route Handlers
+
 ## Middleware 
 Middleware are functions that run right before your handlers run. They can do things like augment the request, log, handle errors, authenticate, etc. 
 ```js
@@ -217,5 +219,63 @@ export const signin = async (req, res) => {
 
   const token = createJWT(user) // When signin, user also don't have a JWT token yet. 
   res.json({token})
+}
+```
+Adding User Routes in `src/server.ts`
+```ts
+import { createNewUser, signin } from './handlers/user'
+
+app.use('/api', protect, router)
+
+app.post('/user', createNewUser)
+app.post('/signin', signin)
+
+export default app
+```
+
+## Validation
+Validate user inputs, use middleware as validator.  
+`npm i express-validator`
+`src/router.ts`
+```ts
+import { body } from 'express-validator'
+import { handleInputErrors } from './modules/middleware'
+
+/**
+ * Product
+ */
+router.put('product/:id', body('name').isString(), handleInputErrors, (req, res) => {}) // request body should have name field which is string type.
+router.post('/product', body('name').isString(), handleInputErrors, (req, res) => {})
+
+/**
+ * Update
+ */
+router.put('/update/:id', 
+  body('title').optional(), // it's optional since this is update, not create 
+  body('body').optional(), 
+  body('status').isIn(['IN_PROGRESS', 'SHIPPED', 'DEPRECATED']).optional(), 
+  body('version').optional(), 
+  (req, res) => {}
+)
+router.post('/update', 
+  body('title').exists().isString(),
+  body('body').exists().isString(),
+  body('productId').exists().isString(),
+  () => {}
+)
+```
+Create `src/modules/middleware.ts`
+```ts
+import { validationResult } from 'express-validator'
+
+export const handleInputErrors = (req, res, next) => {
+  const errors = validationResult(req)
+
+  if(!errors.isEmpty()) {
+    res.status(400)
+    res.json({ errors: errors.array() })
+  } else {
+    next()
+  }
 }
 ```
