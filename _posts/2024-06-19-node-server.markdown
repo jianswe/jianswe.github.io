@@ -9,8 +9,6 @@ sending the right data back requires using multiple features of the computer.
 Javascript doesn't have access to all of those, but C++ does. So Node.js is written in C++. 
 
 ## http Module 
-`Next.js` is heavily based of `Express`.   
-`Express` is built on top of `http`
 ```js
 import http from "http"
 
@@ -41,3 +39,21 @@ An HTTP method or Verb are constants that are used by API developers and HTTP to
 
 #### Route Handlers 
 A route handler is a function that executes when a certain route is triggered from an incoming request. 
+
+## Express
+`Next.js` is heavily based of `Express`, `Express` is built on top of `http` module. 
+```js
+const express = require('express')
+
+const app = express()
+
+app.get('/', (req, res) => {
+  console.log('hello from express')
+  res.status(200)
+  res.json({ message: 'hello' })
+})
+
+app.listen(3001, () => {
+  console.log('hello on http://localhost:3001)
+})
+```
