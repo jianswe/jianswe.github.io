@@ -1,0 +1,3 @@
+# Prisma 
+## ORM 
+Object-Relational Mapping (ORM) is a term used to describe a technique that allows you to interact with a DB using an object-oriented approach. 
