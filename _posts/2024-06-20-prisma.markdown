@@ -29,7 +29,24 @@ model Product {
   belongsToId @String
   belongsTo User @relation(fields: [belongsToId], references: [id])
 }
+
+model Update {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title   String
+  body    String
+  status  UPDATE_STATUS @default(IN_PROGRESS)
+  version String?
+  asset   String?
+
+  productId   String
+  product     Product       @relation(fields: [productId], references: [id])
+  updatePoints UpdatePoint[]
+}
 ```
+`@updatedAt` is needed for updatedAt field to be autofilled. 
 
 ## Migrations 
 1. Initial migration, apply schema to DB.
