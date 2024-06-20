@@ -350,3 +350,40 @@ export const handleInputErrors = (req, res, next) => {
   }
 }
 ```
+
+## Error Handlers
+Error handlder has to come after all the routes. 
+`src/server.ts`
+```ts
+app.post('/signin', signin)
+
+app.use((err, req, res, next) => {
+  console.log(err)
+  res.json({message: 'opps there was an error'})
+})
+
+export default app
+```
+
+### Async Error Handlers 
+Express cannot handle async errors. The server will crash. We need to handle async errors by ourselves. 
+```ts
+app.get('/', (req, res, next) => { // error handler comes after route handler, that's why we use next here. 
+    setTimeout(() => {
+        next(new Error('error'))
+    }, 1)
+})
+
+// route handers 
+app.use('/api', protect, router)
+app.post('/user', createNewUser)
+app.post('/signin', signin)
+
+// error hander 
+app.use((err, req, res, next) => {
+    console.log(err)
+    res.json({message: `opps there was an error: ${err.message}`})
+})
+
+export default app
+```
