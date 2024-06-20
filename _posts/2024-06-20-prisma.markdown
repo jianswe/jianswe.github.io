@@ -39,3 +39,30 @@ model Product {
 
 `npx prisma migrate dev --name init` Sync DB with schema, generate Prisma client. 
 
+## Prisma Client 
+Create `src/db.ts`, so we don't need to create a new client for every connection. 
+```ts
+import { PrismaClient} from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+export default prisma
+```
+### How to use Prisma client
+For example, `src/handlers/user.ts`
+```ts
+import prisma from '../db'
+import { comparePasswords, createJWT, hashPassword } from '../modules/auth'
+
+export const createNewUser = async (req, res) => {
+  const user = await prisma.user.create({
+    data: {
+      username: req.body.username,
+      password: await hashPassword(req.body.password) 
+    }
+  })
+
+  const token = createJWT(user) // Checkout Express Authentication section
+  res.json({token})
+}
+```
