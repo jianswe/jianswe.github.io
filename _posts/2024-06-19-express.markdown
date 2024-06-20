@@ -1,0 +1,98 @@
+# Express.js
+
+## Routes
+### CRUD
+* `GET product/:id` - get a product by a given ID
+* `GET product` - get all the products (for an authenticated user)
+* `POST product` - create a new product
+* `PUT product/:id` - update or replace a product that matches a given ID
+* `DELETE product/:id` - delete a product by a given ID
+
+### Create routes 
+Create a new file, `src/router.ts`
+```js
+import { Router } from 'express'
+
+const router = Router() // router is like a sub app
+
+/**
+ * Product
+ */
+router.get('/product', (req, res) => {
+  res.json({ message: 'hello' })
+})
+router.get('/product/:id', () => {})
+router.put('/product/:id', () => {})
+router.post('/product', () => {})
+router.delete('/product/:id', () => {})
+
+export default router 
+```
+
+Mount `router` to `app`. 
+Go back to `src/server.ts` 
+```js
+import router from './router'
+
+const app = express()
+
+app.use('/api', router) // /api/product
+
+export default app
+```
+
+### Testing the API 
+Testing the API with Thunder Client (VS code plugin) or Postman.    
+Example: GET http://localhost:3001/api/product     
+will get 
+```
+{
+  "message": "hello"
+}
+```
+
+## Middleware 
+Middleware are functions that run right before your handlers run. They can do things like augment the request, log, handle errors, authenticate, etc. 
+```js
+const myMiddleware = (req, res, next) => {
+  // ... do my work, and when I done call next()
+  next();
+}
+```
+
+### Third-party Middlewares
+`morgan` A middleware that logs requests. 
+`npm i morgan --save`
+```js
+import express from 'express'
+import morgan from 'morgan'
+import cors from 'cors'
+
+const app= express()
+
+app.use(cors()) // allow CORS 
+app.use(morgan('dev'))
+app.use(express.json()) // allow clients to send us JSON
+app.use(express.urlencoded({extended: true})) // allow clients to add things like query string 'google.com?a=1,thing=otherthing'
+```
+How does the log looks like? 
+`GET /api/product 200 1092.252 ms - 172`
+
+### Creating a Custom Middleware 
+```js
+app.use((req, res, next) => {
+    req.shhhh_secret = 'doggy' // add secret to request object, all routes will have access to 'doggy'
+    next()
+})
+```
+How does logger middleware execute when a request come in? 
+A function returns another function. 
+```js
+const customLogger = (message) => (req, res, next) => {
+  console.log(`Hello from ${message}`)
+  next()
+}
+
+app.use(customLogger('customer logger'))
+```
+
