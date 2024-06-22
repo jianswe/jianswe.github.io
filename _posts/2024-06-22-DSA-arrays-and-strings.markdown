@@ -12,6 +12,32 @@
 | Random access | O(1) | O(1) | 
 | Checking if element exists | O(n) | O(n) |
 
+## JavaScript Common methods
+### Array
+`slice(start?, end?)`: returns a shallow copy of a portion of an array into a new array object selected from `start` to `end` (`end` not included). It support negative index. 
+```js
+const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
+
+console.log(animals.slice(1, 5));
+// Expected output: Array ["bison", "camel", "duck", "elephant"]
+
+console.log(animals.slice(-2));
+// Expected output: Array ["duck", "elephant"]
+
+console.log(animals.slice(2, -1));
+// Expected output: Array ["camel", "duck"]
+
+console.log(animals.slice());
+// Expected output: Array ["ant", "bison", "camel", "duck", "elephant"]
+```
+`splice(start, deleteCount, item1, item2, /* …, */ itemN))`: changes the contents of an array by removing or replacing existing elements and/or adding new elements *in place*.   
+
+### String 
+`slice(start, end?)`: works the same as Array `slice`    
+`substr()`: **deprecated**   
+`substring(start, end?)`: returns the part of this string from the start index up to and excluding the end index, or to the end of the string if no end index is supplied.   
+
+
 ## Two Pointers 
 ### 4Sum 
 Given an array `nums` of `n` integers, return an array of all the unique quadruplets `[nums[a], nums[b], nums[c], nums[d]]` such that:
