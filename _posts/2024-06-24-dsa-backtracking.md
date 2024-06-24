@@ -1,7 +1,5 @@
 # Algorithm: Backtracking 
 
-
-
 ## LeetCode 
 ### 39. Combination Sum
 ```ts 
@@ -51,6 +49,34 @@ function permute(nums: number[]): number[][] {
     }
     
     recursion(nums, [])
+    return ans 
+};
+```
+
+### 78. Subsets
+```ts
+function subsets(nums: number[]): number[][] {
+    let ans = []
+    
+    function recursion(start, count, res) {
+        // console.log(start, count, res)
+        if (count === 0) {
+            ans.push(res)
+            return 
+        }
+        for (let i=start; i<=nums.length-count; i++) {
+            res.push(nums[i])
+            count--
+            recursion(i+1, count, [...res])
+            count++
+            res.pop()
+        }
+    }
+    
+    for (let i=0; i<=nums.length; i++) {
+        recursion(0, i, [])
+    }
+    
     return ans 
 };
 ```
