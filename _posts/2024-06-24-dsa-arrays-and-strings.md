@@ -14,6 +14,7 @@
 
 ## JavaScript Common methods
 ### Array
+#### slice()
 `slice(start?, end?)`: returns a shallow copy of a portion of an array into a new array object selected from `start` to `end` (`end` not included). It support negative index. 
 ```js
 const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
@@ -30,7 +31,24 @@ console.log(animals.slice(2, -1));
 console.log(animals.slice());
 // Expected output: Array ["ant", "bison", "camel", "duck", "elephant"]
 ```
+
+#### splice()
 `splice(start, deleteCount, item1, item2, /* …, */ itemN))`: changes the contents of an array by removing or replacing existing elements and/or adding new elements *in place*.   
+
+#### sort()
+`sort(compareFn?)` sorts the elements of an array in place and returns the reference to the same array, now sorted.  
+The default sort order is ascending.  
+
+`compareFn` A function that determines the order of the elements. The function is called with the following arguments: 
+* `a` The first element for comparison. Will never be `undefined`.
+* `b` The second element for comparison. Will never be `undefined`.
+
+It should return a number where: 
+* A negative value indicates that `a` should come before `b`.
+* A positive value indicates that `a` should come after `b`.
+* Zero or `NaN` indicates that `a` and `b` are considered equal.
+
+To memorize this, remember that `(a, b) => a - b` sorts numbers in ascending order.  
 
 ### String 
 `slice(start, end?)`: works the same as Array `slice`    
