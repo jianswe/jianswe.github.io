@@ -27,6 +27,8 @@ console.log(iterator1.next().value);
 
 console.log(iterator1.next().value);
 // Expected output: Array [1, "bar"]
+
+const array1 = [...map1.entries()] // convert map entries iterable to array 
 ```
 
 ### Object {}
