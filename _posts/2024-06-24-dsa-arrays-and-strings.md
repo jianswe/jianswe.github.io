@@ -13,7 +13,7 @@
 | Checking if element exists | O(n) | O(n) |
 
 ## JavaScript Common methods
-### Array
+### Array methods
 #### slice()
 `slice(start?, end?)`: returns a shallow copy of a portion of an array into a new array object selected from `start` to `end` (`end` not included). It support negative index. 
 ```js
@@ -50,11 +50,16 @@ It should return a number where:
 
 To memorize this, remember that `(a, b) => a - b` sorts numbers in ascending order.  
 
-### String 
-`slice(start, end?)`: works the same as Array `slice`    
-`substr()`: **deprecated**   
-`substring(start, end?)`: returns the part of this string from the start index up to and excluding the end index, or to the end of the string if no end index is supplied.   
+### String methods
+#### slice()
+`slice(start, end?)`: works the same as Array `slice` 
 
+#### substring()   
+`substring(start, end?)`: returns the part of this string from the start index up to and excluding the end index, or to the end of the string if no end index is supplied.   
+`substr()`: **deprecated**
+
+#### localeCompare()
+`localeCompare(compareString, locales?, options?)`: returns a number indicating whether this string comes before, or after or is the same as the given string in sort order.  
 
 ## Two Pointers 
 ### 4Sum 
@@ -190,5 +195,19 @@ function minOperations(nums: number[]): number {
         }
     }
     return ans 
+};
+```
+
+## Sorting 
+### 692. Top K Frequent Words
+https://leetcode.com/problems/top-k-frequent-words/
+```ts
+function topKFrequent(words: string[], k: number): string[] {
+    let freq = new Map()
+    for (let word of words) {
+        freq.set(word, (freq.get(word) ?? 0)+1)
+    }
+    // console.log(freq)
+    return [...freq.entries()].sort((a,b)=> (b[1]-a[1] || a[0].localeCompare(b[0]))).map(([word,freq]) => (word)).slice(0,k)
 };
 ```
