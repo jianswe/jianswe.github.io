@@ -1,6 +1,18 @@
 # Data Structure: Trees and Graphs
 
-## Trees 
+## Binary Trees
+Like a linked list, a **tree** is a type of graph. Also like a linked list, there are multiple types of trees. We will be focusing on **binary trees**.   
+Just like with a linked list, binary trees are implemented using objects of a custom class. This is the typical class definition that will be provided to you in algorithm problems: 
+```js
+class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+```
+
 ### 100. Same Tree 
 ```ts
 /**
@@ -27,6 +39,8 @@ function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
 ```
 
 ## Graphs
+A **graph** is any collection of nodes and their pointers to other nodes. In fact, linked lists and trees are both types of graphs. 
+
 ### 133. Clone Graph
 ```ts
 /**
