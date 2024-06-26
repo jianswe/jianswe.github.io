@@ -38,6 +38,54 @@ function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
 };
 ```
 
+### 1382. Balance a Binary Search Tree
+https://leetcode.com/problems/balance-a-binary-search-tree
+```ts
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     val: number
+ *     left: TreeNode | null
+ *     right: TreeNode | null
+ *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.left = (left===undefined ? null : left)
+ *         this.right = (right===undefined ? null : right)
+ *     }
+ * }
+ */
+
+function balanceBST(root: TreeNode | null): TreeNode | null {
+    // 1. Convert the tree to a sorted array using an in-order traversal.
+    let sortedArr = [] 
+    function inorderTraversal(node: TreeNode | null) {
+        if (!node) return 
+        inorderTraversal(node.left)
+        sortedArr.push(node.val)
+        inorderTraversal(node.right)
+    }
+    inorderTraversal(root)
+    // console.log(sortedArr)
+    // 2. Construct a new balanced tree from the sorted array recursively.
+    const newRoot = new TreeNode()
+    function balancedTree(node, start, end) {
+        const mid = Math.floor((start+end)/2)
+        node.val = sortedArr[mid]
+        if (start < mid) {
+            node.left = new TreeNode()
+            balancedTree(node.left, start, mid-1)
+        }
+        if (mid < end) {
+            node.right = new TreeNode()
+            balancedTree(node.right, mid+1, end)
+        }
+    }
+    balancedTree(newRoot, 0, sortedArr.length-1)
+
+    return newRoot
+};
+```
+
 ## Graphs
 A **graph** is any collection of nodes and their pointers to other nodes. In fact, linked lists and trees are both types of graphs. 
 
