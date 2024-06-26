@@ -96,3 +96,36 @@ function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode
     return ans 
 };
 ```
+
+### 206. Reverse Linked List
+```ts
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function reverseList(head: ListNode | null): ListNode | null {
+    if (!head) return null 
+    let stack=[], currNode = head, ans = new ListNode()
+    while(currNode) {
+        stack.push(currNode.val)
+        currNode = currNode.next
+    }
+    currNode = ans 
+    while(stack.length) {
+        currNode.val = stack.pop()
+        if (stack.length) {
+            currNode.next = new ListNode()
+            currNode = currNode.next
+        }
+    }
+    return ans 
+};
+```
