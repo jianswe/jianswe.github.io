@@ -22,3 +22,30 @@ function merge(intervals: number[][]): number[][] {
     return ans 
 };
 ```
+
+### 349. Intersection of Two Arrays
+```ts
+function intersection(nums1: number[], nums2: number[]): number[] {
+    // const nums1Set = new Set(nums1), nums2Set = new Set(nums2)
+    // const interSet = nums1Set.intersection(nums2)
+    // return [...interSet]
+    
+    nums1.sort((a,b)=>a-b)
+    nums2.sort((a,b)=>a-b)
+    let i=0, j=0, ans = []
+    while (i<nums1.length && j<nums2.length) {
+        if (nums1[i] === nums2[j]) {
+            if (ans[ans.length-1] !==nums1[i]) {
+                ans.push(nums1[i])
+            } 
+            i++
+            j++
+        } else if (nums1[i] > nums2[j]) {
+            j++
+        } else {
+            i++
+        }
+    }
+    return ans 
+};
+```
