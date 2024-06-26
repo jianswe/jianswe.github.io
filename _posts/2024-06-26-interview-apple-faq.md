@@ -41,3 +41,30 @@ function threeSum(nums: number[]): number[][] {
     return ans 
 };
 ```
+
+### 42. Trapping Rain Water
+```ts
+function trap(height: number[]): number {
+    let stack = [[height[0], 0]], ans  = 0
+    for (let i=1; i<height.length; i++) {
+        let [bottomH, bottomInd] = stack[stack.length-1]
+        if (height[i]<=bottomH) {
+            stack.push([height[i], i])
+        } else {
+            while(stack.length>0 && height[i]>bottomH) {
+                 [bottomH, bottomInd] = stack.pop()
+                 if (stack.length>0) {
+                     const [leftH, leftInd] = stack[stack.length-1]
+                     const waterH = Math.min(leftH, height[i]) - bottomH
+                     ans += waterH*(i-leftInd-1);
+                     [bottomH, bottomInd] = stack[stack.length-1];
+                 }
+            }
+            stack.push([height[i], i])
+            
+        }
+        
+    }
+    return ans 
+};
+```
