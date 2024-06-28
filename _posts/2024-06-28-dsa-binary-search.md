@@ -27,10 +27,27 @@ If your input has duplicates, you can modify the binary search template to find 
 ```ts
 let binarySearch = (arr, target) => {
     let left = 0;
+    let right = arr.length; // right index is exclusive 
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] >= target) { 
+            right = mid; // since right index is exclusive, we don't need `mid - 1` here 
+        } else { // since we want the left-most index, we don't increase left when arr[mid] === target 
+            left = mid + 1;
+        }
+    }
+
+    return left;
+}
+```
+The following template will find the right-most insertion point (the index of the right-most element plus one):
+```js
+let binarySearch = (arr, target) => {
+    let left = 0;
     let right = arr.length;
     while (left < right) {
         let mid = Math.floor((left + right) / 2);
-        if (arr[mid] >= target) {
+        if (arr[mid] > target) { // since we want the right-most index, we don't decrease right when arr[mid] === target
             right = mid;
         } else {
             left = mid + 1;
