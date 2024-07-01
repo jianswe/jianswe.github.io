@@ -1,11 +1,11 @@
 # Advanced Web Development Quiz 
 ## async & defer 
 Q1: Put the scripts in the right order of execution  
-  A. <script async src="async1.js" />         // Loads in 300ms    
-  B. <script defer src="defer1.js" />         // Loads in 200ms    
-  C. <script defer src="defer2.js" />         // Loads in 300ms   
-  D. <script async src="async2.js" />         // Loads in 50ms  
-  E. <script async defer="asyncdefer1.js" />  // Loads in 60ms  
+  A. `<script async src="async1.js" />         // Loads in 300ms`    
+  B. `<script defer src="defer1.js" />         // Loads in 200ms`    
+  C. `<script defer src="defer2.js" />         // Loads in 300ms`   
+  D. `<script async src="async2.js" />         // Loads in 50ms`  
+  E. `<script async defer="asyncdefer1.js" />  // Loads in 60ms`  
 
 Answer: D -> E -> A -> B -> C 
 
