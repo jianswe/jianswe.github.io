@@ -62,3 +62,68 @@ function insertIntoBST(root: TreeNode | null, val: number): TreeNode | null {
 ```
 
 ### 450. Delete Node in a BST
+```ts
+function deleteNode(root: TreeNode | null, key: number): TreeNode | null {
+    let curr = root, parent 
+    while (curr) {
+        if (curr.val === key) {
+            break 
+        } else if (curr.val < key) {
+            parent = curr 
+            curr = curr.right
+        } else {
+            parent = curr 
+            curr = curr.left 
+        }
+    }
+    if (!curr) return root // no node with val === key 
+    if (!parent) { // root has val === key
+        if (!curr.left && !curr.right) {
+            return null
+        } else if (!curr.left) {
+            return curr.right
+        } else if (!curr.right) {
+            return curr.left
+        } else {
+            let rightLeft = curr.right, rightLeftParent
+            while (rightLeft.left) {
+                rightLeftParent = rightLeft
+                rightLeft = rightLeft.left
+            }
+            curr.val = rightLeft.val 
+            if (rightLeftParent) rightLeftParent.left = rightLeft.right
+            else curr.right = rightLeft.right 
+            return root 
+        }
+    }
+    if (!curr.left && !curr.right) {
+        if (parent.val < curr.val) {
+            parent.right = null 
+        } else {
+            parent.left = null 
+        }
+    } else if (!curr.left) {
+        if (parent.val < curr.val) {
+            parent.right = curr.right
+        } else {
+            parent.left = curr.right
+        }
+    } else if (!curr.right) {
+        if (parent.val < curr.val) {
+            parent.right = curr.left
+        } else {
+            parent.left = curr.left
+        }
+    } else {
+        let rightLeft = curr.right, rightLeftParent
+        while (rightLeft.left) {
+            rightLeftParent = rightLeft
+            rightLeft = rightLeft.left
+        }
+        curr.val = rightLeft.val 
+        if (rightLeftParent) rightLeftParent.left = rightLeft.right
+        else curr.right = rightLeft.right  
+    }
+    return root 
+};
+```
