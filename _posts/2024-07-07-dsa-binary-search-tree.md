@@ -1,10 +1,10 @@
 # Data Structure: Binary Search Tree 
+## Introduction to BST
 A **Binary Search Tree** is a special form of a binary tree. 
 1. The value in each node must be *greater than* (or equal to) any values in its *left subtree*
-2. The value in each node must be *less than* (or equal to) any values in its *right subtree*. 
+2. The value in each node must be *less than* (or equal to) any values in its *right subtree*.
 
-## Basic Operations in BST 
-### 700. Search in a Binary Search Tree
+### 285. Inorder Successor in BST
 ```ts
 /**
  * Definition for a binary tree node.
@@ -20,6 +20,42 @@ A **Binary Search Tree** is a special form of a binary tree.
  * }
  */
 
+function inorderSuccessor(root: TreeNode | null, p: TreeNode | null): TreeNode | null {
+    let curr, parent 
+    // if p has right child, then the right left most child will be p's successor 
+	if (p.right) {
+        curr = p.right
+        while (curr.left) {
+            curr = curr.left
+        }
+        return curr
+    }
+    
+    // if p doesn't have right child, then p's parent could be p's successor 
+    // but p has to be the parent's left child 
+    // or p's parent is p's grandparent's left child, ... 
+    curr = root
+    let ans 
+    while (curr) {
+        if (curr.val === p.val) {
+            return ans 
+        } else if (curr.val < p.val) {
+            parent = curr
+            curr = curr.right
+        } else {
+            parent = curr 
+            ans = curr
+            curr = curr.left
+        }
+    }
+    return null 
+};
+```
+
+
+## Basic Operations in BST 
+### 700. Search in a Binary Search Tree
+```ts
 function searchBST(root: TreeNode | null, val: number): TreeNode | null {
     let cur = root
     while(cur) {
