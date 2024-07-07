@@ -13,10 +13,13 @@ Usually, a problem where you need to solve by DP can only be solved by DP (in ap
 
 ## Strategic Approach to DP 
 ### Framework for DP Problems
+1. A function or data structure that will compute/contain the answer to the problem for every given state.  
 We define a recursive function, usually called `dp`, the return of the function is the answer to the original problem as if the arguments you passed to it were the input.  
 The arguments the recursive funciton takes represent a **state**.  
 When we look at tree traversal, for example, DFS, a node is never visited twice, which means the state is never repeated.   
-But for DP, state can be revisited multiple times, so we need to cache the answer for a given state, this process is called **memoization**.  
+But for DP, state can be revisited multiple times, so we need to cache the answer for a given state, this process is called **memoization**.
+2. A recurrence relation to transition between states.
+3. Base cases, so that our recurrence relation doesn't go on infinitely. 
 
 Using DP to find the nth fibonacci number. 
 ```ts
