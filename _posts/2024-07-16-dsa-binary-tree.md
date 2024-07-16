@@ -69,6 +69,18 @@ function inorderTraversal(root: TreeNode | null): number[] {
 Typically, for **binary search tree**, we can retrieve all the data in sorted order using in-order traversal.  
 #### <a href="https://leetcode.com/problems/binary-tree-postorder-traversal/" target="_blank">145. Binary Tree Postorder Traversal</a> 
 Post-order traversal is to traverse the left subtree first. Then traverse the right subtree. Finally, visit the root. 
+##### Solution 1: Recursion
+```ts
+function postorderTraversal(root: TreeNode | null): number[] {
+    if (!root) return []
+    let ans = []
+    ans.push(...postorderTraversal(root.left))
+    ans.push(...postorderTraversal(root.right))
+    ans.push(root.val)
+    return ans 
+};
+```
+
 ##### Use Cases 
 * When you delete nodes in a tree, deletion process will be in post-order.
 * Post-order is widely used in mathematical expressions. You can easily handle the expression using a stack. Each time when you meet a operator, you can just pop 2 elements from the stack, calculate the result and push the result back into the stack.  
