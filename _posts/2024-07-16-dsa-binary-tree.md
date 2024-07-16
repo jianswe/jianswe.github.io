@@ -18,7 +18,7 @@ class TreeNode {
 
 ## Traversal 
 ### DFS (Depth-First Search)   
-#### 144. Binary Tree Preorder Traversal 
+#### <a href="https://leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank">144. Binary Tree Preorder Traversal</a> 
 Pre-order traversal is to visit the root frist. Then traverse the left subtree. Finally, traverse the right subtree. 
 ##### Solution 1: Recursion
 ```ts
@@ -46,7 +46,7 @@ function preorderTraversal(root: TreeNode | null): number[] {
 };
 ```
 
-#### 94. Binary Tree Inorder Traversal 
+#### <a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank">94. Binary Tree Inorder Traversal</a> 
 In-order traversal is to traverse the left subtree first. Then visit the root. Finally, traverse the right subtree. 
 ##### Solution 1: Recursion 
 ```ts
@@ -67,30 +67,19 @@ function inorderTraversal(root: TreeNode | null): number[] {
 
 ##### Use Cases
 Typically, for **binary search tree**, we can retrieve all the data in sorted order using in-order traversal.  
-#### Post-order Traversal 
+#### <a href="https://leetcode.com/problems/binary-tree-postorder-traversal/" target="_blank">145. Binary Tree Postorder Traversal</a> 
 Post-order traversal is to traverse the left subtree first. Then traverse the right subtree. Finally, visit the root. 
 ##### Use Cases 
 * When you delete nodes in a tree, deletion process will be in post-order.
 * Post-order is widely used in mathematical expressions. You can easily handle the expression using a stack. Each time when you meet a operator, you can just pop 2 elements from the stack, calculate the result and push the result back into the stack.  
 
 ### BFS (Breadth-First Search)
+#### <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank">102. Binary Tree Level Order Traversal</a>
 
-### [100. Same Tree](https://leetcode.com/problems/same-tree) 
+
+## Other Common LeetCode Questions
+#### <a href="https://leetcode.com/problems/same-tree/" target="_blank">100. Same Tree</a>
 ```ts
-/**
- * Definition for a binary tree node.
- * class TreeNode {
- *     val: number
- *     left: TreeNode | null
- *     right: TreeNode | null
- *     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.left = (left===undefined ? null : left)
- *         this.right = (right===undefined ? null : right)
- *     }
- * }
- */
-
 function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
     if (p === null && q === null) return true
     if (p === null || q === null) return false 
@@ -100,7 +89,7 @@ function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
 };
 ```
 
-### <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree" target="_blank">236. Lowest Common Ancestor of a Binary Tree</a>
+#### <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree" target="_blank">236. Lowest Common Ancestor of a Binary Tree</a>
 ```ts
 function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
 	if (root === null || root === p || root === q) {
