@@ -75,7 +75,24 @@ Post-order traversal is to traverse the left subtree first. Then traverse the ri
 
 ### BFS (Breadth-First Search)
 #### <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank">102. Binary Tree Level Order Traversal</a>
-
+```ts
+function levelOrder(root: TreeNode | null): number[][] {
+    if (!root) return []
+    let level = 0, queue = [root], ans = []
+    while (queue.length>0) {
+        ans[level] = []
+        let newQueue = []
+        for (const node of queue) {
+            ans[level].push(node.val)
+            if (node.left) newQueue.push(node.left)
+            if (node.right) newQueue.push(node.right)
+        }
+        queue = newQueue
+        level++
+    }
+    return ans 
+};
+```
 
 ## Other Common LeetCode Questions
 #### <a href="https://leetcode.com/problems/same-tree/" target="_blank">100. Same Tree</a>
