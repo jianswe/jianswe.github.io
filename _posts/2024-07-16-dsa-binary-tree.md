@@ -99,3 +99,17 @@ function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
 };
 ```
+
+### <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree" target="_blank">236. Lowest Common Ancestor of a Binary Tree</a>
+```ts
+function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+	if (root === null || root === p || root === q) {
+        return root 
+    }
+    const left = lowestCommonAncestor(root.left, p, q)
+    const right = lowestCommonAncestor(root.right, p, q)
+    if (left && right) return root 
+    if (left) return left
+    return right 
+};
+```
