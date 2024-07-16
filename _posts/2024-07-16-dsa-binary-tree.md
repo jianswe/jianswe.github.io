@@ -39,7 +39,7 @@ function preorderTraversal(root: TreeNode | null): number[] {
         const current = stack.pop()
         if (!current) continue 
         ans.push(current.val)
-        if (current.right) stack.push(current.right)
+        if (current.right) stack.push(current.right) // we push right node first so it can be poped later than left node  
         if (current.left) stack.push(current.left)
     }
     return ans 
@@ -88,11 +88,11 @@ function postorderTraversal(root: TreeNode | null): number[] {
     let stack = [root], ans = []
     while(stack.length>0) {
         const curr = stack.pop()
-        if (curr.left) stack.push(curr.left)
+        if (curr.left) stack.push(curr.left) // notice: we push left node first, this is different than in order traversal
         if (curr.right) stack.push(curr.right)
         ans.push(curr.val)
     }
-    return ans.reverse() // in order reverse
+    return ans.reverse() 
 };
 ```
 
