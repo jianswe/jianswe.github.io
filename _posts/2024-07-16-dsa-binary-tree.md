@@ -81,6 +81,21 @@ function postorderTraversal(root: TreeNode | null): number[] {
 };
 ```
 
+##### Solution 2: Stack
+```ts
+function postorderTraversal(root: TreeNode | null): number[] {
+    if (!root) return []
+    let stack = [root], ans = []
+    while(stack.length>0) {
+        const curr = stack.pop()
+        if (curr.left) stack.push(curr.left)
+        if (curr.right) stack.push(curr.right)
+        ans.push(curr.val)
+    }
+    return ans.reverse() // in order reverse
+};
+```
+
 ##### Use Cases 
 * When you delete nodes in a tree, deletion process will be in post-order.
 * Post-order is widely used in mathematical expressions. You can easily handle the expression using a stack. Each time when you meet a operator, you can just pop 2 elements from the stack, calculate the result and push the result back into the stack.  
