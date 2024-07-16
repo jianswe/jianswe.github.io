@@ -33,11 +33,11 @@ Let's define a function `dp(state)` that
 2. **A recurrence relation to transition between states.**  
 `dp(s) = min(dp(s-c[i]))+1`, `c[i]` is the i's coin. 
 
-3. **Base cases**, so that our recurrence relation doesn't go on infinitely.
-dp(s)=-1, if s<0
-dp(0)=0
+3. **Base cases**, so that our recurrence relation doesn't go on infinitely.  
+`dp(s)=-1, if s<0`
+`dp(0)=0`
 
-Implementation
+#### Implementation
 ```ts
 function coinChange(coins: number[], amount: number): number {
     let memo = new Array(amount+1).fill(0)
@@ -57,5 +57,22 @@ function coinChange(coins: number[], amount: number): number {
     }
 
     return dp(amount)
+};
+```
+
+#### Covert top-down solution to bottom-up
+```ts
+function coinChange(coins: number[], amount: number): number {
+    let memo = new Array(amount+1).fill(0)
+    for (let i=1; i<=amount; i++) {
+        let min = Infinity
+        for (const coin of coins) {
+            if (i-coin>=0 && memo[i-coin] !==-1 && memo[i-coin]<min) {
+                min = 1 + memo[i-coin]
+            } 
+        }
+        memo[i] = (min === Infinity) ? -1 : min
+    }
+    return memo[amount]
 };
 ```
