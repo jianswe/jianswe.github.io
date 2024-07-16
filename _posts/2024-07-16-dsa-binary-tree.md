@@ -62,7 +62,19 @@ function inorderTraversal(root: TreeNode | null): number[] {
 
 ##### Solution 2: Stack 
 ```ts
-
+function inorderTraversal(root: TreeNode | null): number[] {
+    let stack = [], curr = root, ans = []
+    while (curr || stack.length>0) {
+        while (curr) {
+            stack.push(curr)
+            curr = curr.left
+        }
+        curr = stack.pop()
+        ans.push(curr.val)
+        curr = curr.right
+    }
+    return ans 
+};
 ```
 
 ##### Use Cases
